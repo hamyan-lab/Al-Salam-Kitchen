@@ -44,15 +44,21 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {['Home', 'Dishes', 'About', 'Menu', 'Contact'].map((item) => (
+            {[
+              { name: 'Home', id: 'home' },
+              { name: 'Dishes', id: 'dishes' },
+              { name: 'About', id: 'about' },
+              { name: 'Menu', id: 'menu' },
+              { name: 'Contact', id: 'contact' }
+            ].map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
+                key={item.name}
+                onClick={() => scrollToSection(item.id)}
                 className={`font-medium transition-colors duration-300 hover:text-amber-500 ${
                   isScrolled ? 'text-gray-700' : 'text-white'
                 }`}
               >
-                {item}
+                {item.name}
               </button>
             ))}
             
@@ -84,13 +90,19 @@ const Header = () => {
         {isMobileMenuOpen && (
           <nav className="lg:hidden bg-white border-t border-gray-200">
             <div className="px-4 py-6 space-y-4">
-              {['Home', 'Dishes', 'About', 'Menu', 'Contact'].map((item) => (
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'Dishes', id: 'dishes' },
+                { name: 'About', id: 'about' },
+                { name: 'Menu', id: 'menu' },
+                { name: 'Contact', id: 'contact' }
+              ].map((item) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
+                  key={item.name}
+                  onClick={() => scrollToSection(item.id)}
                   className="block w-full text-left font-medium text-gray-700 hover:text-amber-600 transition-colors duration-300"
                 >
-                  {item}
+                  {item.name}
                 </button>
               ))}
               

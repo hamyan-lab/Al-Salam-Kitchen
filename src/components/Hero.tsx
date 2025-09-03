@@ -34,13 +34,23 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              const menuSection = document.getElementById('menu');
+              if (menuSection) {
+                menuSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             View Our Menu
           </button>
           <button
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => {
+              const aboutSection = document.getElementById('about');
+              if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105"
           >
             Our Story

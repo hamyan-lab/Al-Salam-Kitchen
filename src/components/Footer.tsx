@@ -26,11 +26,25 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h3>
             <ul className="space-y-2">
-              {['Home', 'About Us', 'Menu', 'Catering', 'Events'].map((link) => (
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'About Us', id: 'about' },
+                { name: 'Menu', id: 'menu' },
+                { name: 'Dishes', id: 'dishes' },
+                { name: 'Contact', id: 'contact' }
+              ].map((link) => (
                 <li key={link}>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                    {link}
-                  </a>
+                  <button 
+                    onClick={() => {
+                      const section = document.getElementById(link.id);
+                      if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="text-gray-300 hover:text-white transition-colors duration-300 text-left"
+                  >
+                    {link.name}
+                  </button>
                 </li>
               ))}
             </ul>
