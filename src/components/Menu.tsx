@@ -73,16 +73,3 @@ const Menu = () => {
 };
 
 export default Menu;
-
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Menu;
