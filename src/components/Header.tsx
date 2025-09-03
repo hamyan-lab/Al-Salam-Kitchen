@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Utensils } from 'lucide-react';
+import { Menu, X, Utensils, ShoppingCart } from 'lucide-react';
+import { useOrder } from '../context/OrderContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { getTotalItems } = useOrder();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +55,18 @@ const Header = () => {
                 {item}
               </button>
             ))}
+            
+            {/* Cart Icon for Desktop */}
+            <div className="relative">
+              <ShoppingCart className={`h-6 w-6 transition-colors duration-300 ${
+                isScrolled ? 'text-gray-700' : 'text-white'
+              }`} />
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  {getTotalItems()}
+                </span>
+              )}
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -79,6 +93,16 @@ const Header = () => {
                   {item}
                 </button>
               ))}
+              
+              {/* Cart Info for Mobile */}
+              <div className="pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-gray-700">Cart Items:</span>
+                  <span className="bg-amber-500 text-white px-3 py-1 rounded-full font-semibold">
+                    {getTotalItems()}
+                  </span>
+                </div>
+              </div>
             </div>
           </nav>
         )}

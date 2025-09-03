@@ -1,34 +1,15 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { useOrder } from '../context/OrderContext';
+import { menuData } from '../data/menuData';
 
-const featuredDishes = [
-  {
-    id: 1,
-    name: 'Mandi',
-    description: 'Traditional spiced rice with tender lamb, cooked in underground ovens for authentic smoky flavor.',
-    image: 'https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg',
-    price: '$18.99',
-    rating: 5
-  },
-  {
-    id: 2,
-    name: 'Saltah',
-    description: 'Yemen\'s national dish - a hearty stew with meat, vegetables, and fenugreek foam.',
-    image: 'https://images.pexels.com/photos/6544197/pexels-photo-6544197.jpeg',
-    price: '$15.99',
-    rating: 5
-  },
-  {
-    id: 3,
-    name: 'Fahsa',
-    description: 'Slow-cooked lamb stew with traditional Yemeni spices, served bubbling hot.',
-    image: 'https://images.pexels.com/photos/6659765/pexels-photo-6659765.jpeg',
-    price: '$19.99',
-    rating: 5
-  }
-];
+const featuredDishes = menuData.filter(dish => 
+  ['mandi-lamb', 'saltah', 'fahsa'].includes(dish.id)
+);
 
 const FeaturedDishes = () => {
+  const { addToCart } = useOrder();
+
   return (
     <section id="dishes" className="py-20 bg-white">
       <div className="container mx-auto px-4 lg:px-6">
@@ -54,7 +35,7 @@ const FeaturedDishes = () => {
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full font-semibold">
-                  {dish.price}
+                  ${dish.price.toFixed(2)}
                 </div>
               </div>
               
@@ -62,7 +43,7 @@ const FeaturedDishes = () => {
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-2xl font-bold text-gray-900">{dish.name}</h3>
                   <div className="flex items-center">
-                    {[...Array(dish.rating)].map((_, i) => (
+                    {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-amber-400 fill-current" />
                     ))}
                   </div>
@@ -72,8 +53,11 @@ const FeaturedDishes = () => {
                   {dish.description}
                 </p>
                 
-                <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105">
-                  Order Now
+                <button 
+                  onClick={() => addToCart(dish)}
+                  className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105"
+                >
+                  Add to Cart
                 </button>
               </div>
             </div>
